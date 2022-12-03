@@ -18,31 +18,18 @@ fn score(round: Vec<&str>) -> i32 {
         score += 6
     }
 
-    if round[1] == "Y" {
-        if round[0] == "A" {
-            score += 1
-        } else if round[0] == "B" {
-            score += 2
-        } else if round[0] == "C" {
-            score += 3
-        }
-    } else if round[1] == "Z" {
-        if round[0] == "A" {
-            score += 2
-        } else if round[0] == "B" {
-            score += 3
-        } else if round[0] == "C" {
-            score += 1
-        }
-    } else if round[1] == "X" {
-        if round[0] == "A" {
-            score += 3
-        } else if round[0] == "B" {
-            score += 1
-        } else if round[0] == "C" {
-            score += 2
-        }
-    }
+    score += match (round[1],round[0]) {
+        ("Y", "A") => 1,
+        ("Y", "B") => 2,
+        ("Y", "C") => 3,
+        ("Z", "A") => 2,
+        ("Z", "B") => 3,
+        ("Z", "C") => 1,
+        ("X", "A") => 3,
+        ("X", "B") => 1,
+        ("X", "C") => 2,
+        (_,_)=>0
+    };
 
     score
 }
