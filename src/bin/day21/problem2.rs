@@ -11,19 +11,13 @@ pub fn main() {
 
     let root = map.get("root").unwrap();
 
-   
-
-    println!(
-        "{:?}",
-        get_human_value("root", 0,  &map)
-    );
+    println!("{:?}", get_human_value("root", 0, &map));
 }
 
-fn get_human_value(n: &str,target:usize, map: &HashMap<&str, Vec<&str>>) -> usize {
+fn get_human_value(n: &str, target: usize, map: &HashMap<&str, Vec<&str>>) -> usize {
     if n == "humn" {
-        return target
+        return target;
     }
-    
     let ops = map.get(n).unwrap();
 
     if has_human(ops[0], map) {
@@ -31,12 +25,12 @@ fn get_human_value(n: &str,target:usize, map: &HashMap<&str, Vec<&str>>) -> usiz
         if n == "root" {
             return get_human_value(ops[0], other_value, map);
         }
-        
-        let target2 =  match ops[1] {
+
+        let target2 = match ops[1] {
             "*" => target / other_value,
             "/" => target * other_value,
             "-" => target + other_value,
-            _ => target-other_value,
+            _ => target - other_value,
         };
 
         return get_human_value(ops[0], target2, map);
@@ -46,11 +40,11 @@ fn get_human_value(n: &str,target:usize, map: &HashMap<&str, Vec<&str>>) -> usiz
             return get_human_value(ops[2], other_value, map);
         }
 
-        let target2 =  match ops[1] {
+        let target2 = match ops[1] {
             "*" => target / other_value,
-            "/" => other_value /target,
+            "/" => other_value / target,
             "-" => other_value - target,
-            _ => target-other_value,
+            _ => target - other_value,
         };
 
         return get_human_value(ops[2], target2, map);
